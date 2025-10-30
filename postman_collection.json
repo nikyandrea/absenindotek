@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "Absensi Indotek API",
+    "description": "Collection untuk testing API Sistem Absensi",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@absensi.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://absenindotek.test/api/auth/login",
+              "protocol": "http",
+              "host": ["absenindotek", "test"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://absenindotek.test/api/auth/me",
+              "protocol": "http",
+              "host": ["absenindotek", "test"],
+              "path": ["api", "auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance",
+      "item": [
+        {
+          "name": "Check In",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": -6.208763,\n  \"longitude\": 106.845599,\n  \"accuracy\": 10.5,\n  \"photo_face\": \"base64_encoded_image_here\",\n  \"device_info\": {\n    \"platform\": \"android\",\n    \"version\": \"11\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://absenindotek.test/api/attendance/check-in",
+              "protocol": "http",
+              "host": ["absenindotek", "test"],
+              "path": ["api", "attendance", "check-in"]
+            }
+          }
+        },
+        {
+          "name": "Get History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://absenindotek.test/api/attendance/history?month=2025-10",
+              "protocol": "http",
+              "host": ["absenindotek", "test"],
+              "path": ["api", "attendance", "history"],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "2025-10"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
